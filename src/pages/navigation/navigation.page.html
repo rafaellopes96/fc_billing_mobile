@@ -1,0 +1,20 @@
+<ion-header color="dark">
+    <ion-title>
+      Menu
+    </ion-title>
+</ion-header>
+
+<ion-content>
+    <ion-img width="160" height="31" class="topLeft" src="http://fc-billing-homolog.azurewebsites.net/Content/images/billing-logo.png"></ion-img>
+
+    <button ion-button icon-left color="dark" class="button" (click)="goToBillingsPage()">
+        <ion-icon name="list-box"></ion-icon>
+            Listar Todas as Cartas
+    </button>
+
+    <button ion-button icon-left color="dark" class="buttonFilter" (click)="goToFiltersPage()">
+        <ion-icon name="search"></ion-icon>
+            Filtrar Cartas
+    </button>
+</ion-content>
+

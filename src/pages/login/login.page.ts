@@ -1,4 +1,4 @@
-import { FiltersPage } from '../pages';
+import { NavigationPage } from '../pages';
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class LoginPage{
     constructor(public nav:NavController){}
 
-    goToFilterOptions(){
-        this.nav.push(FiltersPage);
+    goToNavigationPage(){
+        this.nav.push(NavigationPage);
     }
 }

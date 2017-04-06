@@ -1,0 +1,23 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+
+<ion-img width="160" height="31" class="topLeft" src="http://fc-billing-homolog.azurewebsites.net/Content/images/billing-logo.png"></ion-img>
+
+    <ion-card color="dark" class="card">
+        <ion-card-header>
+            <ion-icon name="mail" item-right></ion-icon>
+            Cartas
+        </ion-card-header>
+
+        <ion-list>
+
+            <button ion-item *ngFor="let letter of letters" (click)="letterTapped($event, letter)">
+                    {{ letter.name }}
+            </button>
+
+        </ion-list>
+    </ion-card>
+</ion-content>

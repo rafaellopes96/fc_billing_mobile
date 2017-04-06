@@ -6,13 +6,16 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { LoginPage, FiltersPage } from '../pages/pages';
+import { LoginPage, FiltersPage, NavigationPage, BillingsPage, LetterPage } from '../pages/pages';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
-    FiltersPage
+    FiltersPage,
+    NavigationPage,
+    BillingsPage,
+    LetterPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,10 @@ import { LoginPage, FiltersPage } from '../pages/pages';
   entryComponents: [
     MyApp,
     LoginPage,
-    FiltersPage
+    FiltersPage,
+    NavigationPage,
+    BillingsPage,
+    LetterPage
   ],
   providers: [
     StatusBar,
