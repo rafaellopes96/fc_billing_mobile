@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content align="middle">
+    <ion-img width="320" height="62" class="center" src="http://fc-billing.azurewebsites.net/Content/images/billing-logo.png"></ion-img>
+    <ion-item>
+        <ion-label class="centerInput" color="dark" stacked>Usuário</ion-label>
+        <ion-input type="email" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="dark" stacked>Senha</ion-label>
+        <ion-input type="password" placeholder=""></ion-input>
+    </ion-item>
+
+    <button ion-button color="dark" class="centerButton" (click)="goToFilterOptions()">Entrar</button>
+</ion-content>
