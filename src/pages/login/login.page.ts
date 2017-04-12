@@ -1,4 +1,4 @@
-import { NavigationPage } from '../pages';
+import { HomePage } from '../pages';
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class LoginPage{
     constructor(public nav:NavController){}
 
-    goToNavigationPage(){
-        this.nav.push(NavigationPage);
+    goToHomePage(){
+        this.nav.push(HomePage);
     }
 }

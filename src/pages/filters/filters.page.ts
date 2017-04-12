@@ -1,3 +1,4 @@
+import { BillingsPage } from '../pages';
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
@@ -7,20 +8,21 @@ import { Component } from '@angular/core';
 
 export class FiltersPage{
 
-    months= [
-            {id:1, name: 'Janeiro'},
-            {id:2, name: 'Fevereiro'},
-            {id:3, name: 'Março'},
-            {id:4, name: 'Abril'},
-            {id:5, name: 'Maio'},
-            {id:6, name: 'Junho'},
-            {id:7, name: 'Julho'},
-            {id:8, name: 'Agosto'},
-            {id:9, name: 'Setembro'},
-            {id:10, name: 'Outubro'},
-            {id:11, name: 'Novembro'},
-            {id:12, name: 'Dezembro'},
-        ]
+    status= [
+        {id:'AP', name:'Aguardando pagamento'},
+        {id:'EA', name:'Em aberto'},
+        {id:'LC', name:'Liberado cliente'},
+        {id:'LF', name:'Liberado FCamara'},
+        {id:'P', name:'Pago'}
+    ]
 
     constructor(public nav: NavController){}
+
+    goToBillingsPage(){
+        this.nav.push(BillingsPage);
+    }
+
+    filtersPage($event, status){
+        console.log(status);
+    }
 }

@@ -1,8 +1,15 @@
 .center {
     margin-left: auto;
     margin-right: auto;
-    margin-block-start: 110px;
+    margin-block-start: 70px;
     display: block;
+    background: white;
+    max-width: 280px;
+    height: 62px;
+}
+
+.inputs {
+    max-width: 305px;
 }
 
 .centerInput {
@@ -19,23 +26,3 @@
     display: block;
 }
 
-.center {
-    margin-left: auto;
-    margin-right: auto;
-    margin-block-start: 110px;
-    display: block;
-}
-
-.centerInput {
-    //margin-left: auto;
-    //margin-right: auto;
-    margin-block-start: 40px;
-    display: block;
-}
-
-.centerButton {
-    margin-left: auto;
-    margin-right: auto;
-    margin-block-start: 40px;
-    display: block;
-}

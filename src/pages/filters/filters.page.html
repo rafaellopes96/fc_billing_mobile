@@ -7,75 +7,67 @@
 </ion-header>
 
 <ion-content>
-    <ion-list no-border>
+  <ion-list no-border>
 
-      <ion-list-header class="header">
-          Data
-      </ion-list-header>
+    <ion-list-header class="header">
+      Data
+    </ion-list-header>
 
-      <ion-item class="inputsCarta">
-        <ion-label color="dark">Mês</ion-label>
-        <ion-select [(ngModel)]="mes">
-          <ion-option *ngFor="let month of months">
-            {{ month.name }}
-          </ion-option>
-        </ion-select>
-        <ion-icon name='calendar' item-left></ion-icon>
-      </ion-item>
+    <ion-item>
+      <ion-label color="dark">Ano</ion-label>
+      <ion-select [(ngModel)]="ano">
+        <ion-option *ngFor="let year of years">
+          {{ month.name }}
+        </ion-option>
+      </ion-select>
+      <ion-icon name='calendar' item-left></ion-icon>
+    </ion-item>
 
-      <ion-item>
-        <ion-label color="dark">Ano</ion-label>
-        <ion-select [(ngModel)]="ano">
-          <ion-option *ngFor="let year of years">
-            {{ month.name }}
-          </ion-option>
-        </ion-select>
-        <ion-icon name='calendar' item-left></ion-icon>
-      </ion-item>
+  </ion-list>
 
-    </ion-list>
+  <ion-list class="inputsHeader">
 
-    <ion-list class="inputsHeader">
+    <ion-list-header class="header">
+      Carta de Faturamento
+    </ion-list-header>
 
-        <ion-list-header class="header">
-            Carta de Faturamento
-        </ion-list-header>
+    <ion-item class="inputsCarta">
+      <ion-toggle checked="false"></ion-toggle>
+      <ion-label>
+        Emitida
+      </ion-label>
+      <ion-icon name='checkbox-outline' item-left></ion-icon>
+    </ion-item>
 
-        <ion-item class="inputsCarta">
-            <ion-toggle checked="false"></ion-toggle>
-            <ion-label>
-            Emitida
-            </ion-label>
-            <ion-icon name='checkbox-outline' item-left></ion-icon>
-        </ion-item>
+    <ion-item class="inputsCarta">
+      <ion-label color="dark">Status</ion-label>
+      <ion-select [(ngModel)]="estado">
+        <ion-option *ngFor="let stat of status">
+          {{ stat.name }}
+        </ion-option>
+      </ion-select>
+      <ion-icon name='flag' item-left></ion-icon>
+    </ion-item>
 
-        <ion-item>
-            <ion-toggle checked="false"></ion-toggle>
-            <ion-label>
-            Status
-            </ion-label>
-            <ion-icon name='flag' item-left></ion-icon>
-        </ion-item>
+  </ion-list>
 
-    </ion-list>
+  <ion-list class="inputsHeader">
 
-    <ion-list class="inputsHeader">
+    <ion-list-header class="header">
+      Cliente
+    </ion-list-header>
 
-      <ion-list-header class="header">
-          Cliente
-      </ion-list-header>
+    <ion-item class="inputsCarta">
+      <ion-label color="dark" fixed>Nome</ion-label>
+      <ion-input type="text" value=""></ion-input>
+      <ion-icon name='contact' item-left></ion-icon>
+    </ion-item>
 
-      <ion-item class="inputsCarta">
-        <ion-label color="dark" fixed>Nome</ion-label>
-        <ion-input type="text" value=""></ion-input>
-        <ion-icon name='contact' item-left></ion-icon>
-      </ion-item>
+  </ion-list>
 
-    </ion-list>
-
-    <button ion-button icon-left color="dark" (click)="goToBillingsPage()">
+  <button ion-button icon-left color="dark" (click)="goToBillingsPage()" class="centerButton">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
             Filtrar
     </button>
-    
+
 </ion-content>

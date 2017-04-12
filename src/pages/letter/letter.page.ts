@@ -1,4 +1,4 @@
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,6 +6,11 @@ import { Component } from '@angular/core';
 })
 
 export class LetterPage{
-    constructor(public nav:NavController){}
+
+    letter: any;
+
+    constructor(private nav:NavController, private navParams: NavParams){
     
+        this.letter = this.navParams.data;
+    }
 }
