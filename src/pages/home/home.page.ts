@@ -26,8 +26,8 @@ export class HomePage {
             name: "OC"
         },
         {
-            id: "total",
-            name: "Total"
+            id: "todas",
+            name: "Todas"
         }
 
     ]

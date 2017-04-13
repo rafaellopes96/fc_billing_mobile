@@ -12,16 +12,17 @@
     <div class="inputs">
       <ion-item>
             <ion-label class="centerInput" color="dark" stacked>Usuário</ion-label>
-            <ion-input type="email" placeholder=""></ion-input>
+            <ion-input type="email" placeholder="" [(ngModel)]="username">
+            </ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="dark" stacked>Senha</ion-label>
-            <ion-input type="password" placeholder=""></ion-input>
+            <ion-input type="password" placeholder="" [(ngModel)]="password"></ion-input>
         </ion-item>
     </div>
         
 
-    <button ion-button color="dark" class="centerButton" (click)="goToHomePage()">
+    <button ion-button color="dark" class="centerButton" (click)="authUserClient(username, password)">
         Entrar
     </button>
 </ion-content>

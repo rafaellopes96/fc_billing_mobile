@@ -2,10 +2,18 @@ import { FiltersPage, LetterPage } from '../pages';
 import { NavController, NavParams } from 'ionic-angular';
 import { Component } from '@angular/core';
 
+import { Injectable } from '@angular/core';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+
 @Component({
     templateUrl: 'billings.page.html'
+
 })
 
+@Injectable()
 export class BillingsPage{
 
     letters;
@@ -15,10 +23,13 @@ export class BillingsPage{
     i: number;
     private valueReturn;
 
-    constructor(private nav:NavController, private navParams: NavParams){
-        this.initializeLetters();
+    constructor(private nav:NavController, private navParams: NavParams, private http: Http){
+
+        this.letters = this.initializeLetters();
 
         this.div = this.navParams.data;
+
+        console.log(this.letters);
 
         //filtrando as letters pelo departamento selecionado na home page
         this.divFilterLetters();    
@@ -26,9 +37,23 @@ export class BillingsPage{
         //fazendo a soma dos valores das cartas pelo departamento selencionado na home page
         this.valueReturn = this.totalValue();
 
-        this.sortByClient();
-
     }
+
+//     public initializeLetters = () => {
+//         console.log(localStorage.getItem('jwtToken'));
+//     return new Promise((resolve, reject) => {
+//       let headers = new Headers({
+//         'Content-Type': 'application/x-www-form-urlencoded',
+//         'Authorization': `Bearer ${ localStorage.getItem('jwtToken') }`
+//       });
+//       let options = new RequestOptions({ headers: headers });
+//       this.http
+//         .get('http://api-fcamara.azurewebsites.net/v1/billingLetters', options)
+//         .map((res: Response) => JSON.stringify(res.json()))
+//         .subscribe(data => resolve(JSON.parse(data)), err => reject(err))
+//     })
+//   }
+
 
     initializeLetters(){
         this.letters= [
@@ -36,7 +61,7 @@ export class BillingsPage{
             name: 'First OC Card',
             status: 'Em aberto',
             client: 'Michael',
-            issued: 'Emitido',
+            issued: 'Emitida',
             division: 'oc',
             value:12000
         },
@@ -60,7 +85,7 @@ export class BillingsPage{
             name: 'First Port card',
             status: 'Aguardando pagamento',
             client: 'Gustavo',
-            issued: 'Emitido',
+            issued: 'Emitida',
             division: 'port',
             value:5100
         },
@@ -68,7 +93,7 @@ export class BillingsPage{
             name: 'First E-Comerce card',
             status: 'Liberado Cliente',
             client: 'FCamara',
-            issued: 'Emitido',
+            issued: 'Emitida',
             division: 'ecomerce',
             value:10000
         },
@@ -84,7 +109,7 @@ export class BillingsPage{
             name: 'Third OC card',
             status: 'Em aberto',
             client: 'Michael',
-            issued: 'Emitido',
+            issued: 'Emitida',
             division: 'oc',
             value:5600
         }
@@ -103,7 +128,7 @@ export class BillingsPage{
 
     divFilterLetters(){
         
-        if(this.div.id == 'total'){
+        if(this.div.id == 'todas'){
             this.initializeLetters();
         }
         else{
@@ -141,24 +166,12 @@ export class BillingsPage{
 
         if (val && val.trim() != '') {
             this.letters = this.letters.filter((letter) => {
-                return (letter.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                return (letter.client.toLowerCase().indexOf(val.toLowerCase()) > -1);
             })
         }
 
 
     }
 
-    sortByClient(){
-        this.initializeLetters();
-         this.divFilterLetters();
-
-         function compare(a,b){
-             if (a < b) return -1;
-             if (a > b) return 1;
-            return 0;
-         }
-
-         console.log(this.letters.sort(compare));
-    }
-
+    
 }

@@ -16,6 +16,11 @@ export class FiltersPage{
         {id:'P', name:'Pago'}
     ]
 
+    issued= [
+        'Emitida',
+        'Pendente'
+    ]
+
     constructor(public nav: NavController){}
 
     goToBillingsPage(){
@@ -23,6 +28,6 @@ export class FiltersPage{
     }
 
     filtersPage($event, status){
-        console.log(status);
+
     }
 }
