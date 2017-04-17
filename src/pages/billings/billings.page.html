@@ -57,10 +57,10 @@
 
                                 <p></p>
                             <ion-icon name="cash" class="cardIcon"></ion-icon>
-                                R${{ letter.value }},00
+                                R${{ letter.parcelValue * letter.totalParcels }},00
 
-                            <ion-badge item-right item-bottom class=" {{ letter.issued }}">
-                                {{ letter.issued }}
+                            <ion-badge item-right item-bottom class=" {{ letter.emitted }}">
+                                {{ letter.emitted }}
                             </ion-badge>
                         </ion-item>                 
 

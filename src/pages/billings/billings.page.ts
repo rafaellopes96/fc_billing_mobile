@@ -16,16 +16,18 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BillingsPage{
 
-    letters;
+    public letters: any;
 
     div: any;
     sum: number;
     i: number;
-    private valueReturn;
+    //private valueReturn;
 
     constructor(private nav:NavController, private navParams: NavParams, private http: Http){
 
-        this.letters = this.initializeLetters();
+        this.initializeLetters().then(data => console.log(this.letters = data)).catch(err => err);
+
+       
 
         this.div = this.navParams.data;
 
@@ -38,6 +40,10 @@ export class BillingsPage{
         //this.valueReturn = this.totalValue();
 
     }
+
+    
+        
+
 
     public initializeLetters = () => {
         return new Promise((resolve, reject) => {
@@ -52,68 +58,6 @@ export class BillingsPage{
             .subscribe(data => resolve(JSON.parse(data)), err => reject(err))
         })
     }
-
-
-    // initializeLetters(){
-    //     this.letters= [
-    //     {
-    //         name: 'First OC Card',
-    //         status: 'Em aberto',
-    //         client: 'Michael',
-    //         issued: 'Emitida',
-    //         division: 'oc',
-    //         value:12000
-    //     },
-    //     {
-    //         name: 'Second OC card',
-    //         status: 'Pago',
-    //         client: 'FCamara',
-    //         issued: 'Pendente',
-    //         division: 'oc',
-    //         value:3200
-    //     },
-    //     {
-    //         name: 'First Innovation card',
-    //         status: 'Liberado FCamara',
-    //         client: 'Rafael',
-    //         issued: 'Pendente',
-    //         division: 'innovation',
-    //         value:4600
-    //     },
-    //     {
-    //         name: 'First Port card',
-    //         status: 'Aguardando pagamento',
-    //         client: 'Gustavo',
-    //         issued: 'Emitida',
-    //         division: 'port',
-    //         value:5100
-    //     },
-    //     {
-    //         name: 'First E-Comerce card',
-    //         status: 'Liberado Cliente',
-    //         client: 'FCamara',
-    //         issued: 'Emitida',
-    //         division: 'ecomerce',
-    //         value:10000
-    //     },
-    //     {
-    //         name: 'Second E-Comerce card',
-    //         status: 'Pago',
-    //         client: 'FCamara',
-    //         issued: 'Pendente',
-    //         division: 'ecomerce',
-    //         value:7300
-    //     },
-    //     {
-    //         name: 'Third OC card',
-    //         status: 'Em aberto',
-    //         client: 'Michael',
-    //         issued: 'Emitida',
-    //         division: 'oc',
-    //         value:5600
-    //     }
-    // ]
-    // }
 
 //botão de filtrar clicado
     goToFiltersPage(){
@@ -171,6 +115,7 @@ export class BillingsPage{
 
 
     }
+
 
     
 }
