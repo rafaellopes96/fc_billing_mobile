@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 
 export class FiltersPage{
 
+    letterName: string;
+
     status= [
         {id:'AP', name:'Aguardando pagamento'},
         {id:'EA', name:'Em aberto'},
@@ -23,8 +25,8 @@ export class FiltersPage{
 
     constructor(public nav: NavController){}
 
-    goToBillingsPage(){
-        this.nav.push(BillingsPage);
+    goToBillingsPage($event, issue, stat, letterName){
+        this.nav.push(BillingsPage, issue, stat, letterName);
     }
 
     filtersPage($event, status){

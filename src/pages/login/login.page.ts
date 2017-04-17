@@ -1,5 +1,5 @@
 import { HomePage } from '../pages';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -16,13 +16,16 @@ export class LoginPage{
     password: string;
     login: boolean;
     
-    constructor(public nav:NavController, public http:Http){
+    constructor(public nav:NavController, public http:Http, public loadingCtrl: LoadingController){
     }
 
     private urlAuthentication = "http://api-fcamara.azurewebsites.net/v1/token";
     public getObject: Object = {};
 
     authUserClient = (username,password) => {
+
+        this.presentLoadingDefault()
+
         return new Promise((resolve, reject) => {
             let headers = new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -61,6 +64,19 @@ export class LoginPage{
             localStorage.setItem('jwtToken', jwt);
             //window.localStorage.setItem('access_token', jwt);
         }
+    }
+
+
+    presentLoadingDefault() {
+        let loading = this.loadingCtrl.create({
+            content: 'Aguarde por favor...'
+        });
+
+        loading.present();
+
+        setTimeout(() => {
+            loading.dismiss();
+        }, 2500);
     }
 }
 
