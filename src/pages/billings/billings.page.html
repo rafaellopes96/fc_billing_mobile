@@ -34,7 +34,7 @@
                 <ion-icon name='calculator' class="calculatorIcon" item-left></ion-icon>
                     
                 <ion-note item-right>
-                    R${{ valueReturn }},00
+                    {{ valueReturn | currency:'BRL':true }}
                 </ion-note>
             </ion-item>
                 <ion-card *ngFor="let letter of letters" (click)="letterTapped($event, letter)">
@@ -57,7 +57,7 @@
 
                                 <p></p>
                             <ion-icon name="cash" class="cardIcon"></ion-icon>
-                                {{ letter.parcelValue * letter.totalParcels | currency:'BRL':true }}
+                                {{ letter.parcelValue | currency:'BRL':true }}
 
                             <ion-badge item-right item-bottom class=" {{ letter.emitted }}">
                                 {{ letter.emitted }}

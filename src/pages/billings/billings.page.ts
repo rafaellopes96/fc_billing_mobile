@@ -21,32 +21,37 @@ export class BillingsPage {
     div: any;
     sum: number;
     i: number;
-    //private valueReturn;
+    private valueReturn;
 
     constructor(private nav: NavController, private navParams: NavParams, private http: Http) {
 
         this.div = this.navParams.data;
 
         if(this.div.id!='todas'){
+
             //filtrando as letters pelo departamento selecionado na home page
-            this.divFilterLetters();
+            this.lettersByDivision()
+                .then(data => {
+                    this.letters = data;
+                    this.valueReturn = this.totalValue();
+                })
+                .catch(err => err);
+            //fazendo a soma dos valores das cartas pelo departamento selencionado na home page
+            
+
         }else{
+
             this.initializeLetters()
-            .then(data => {
-                this.letters = data;     
-            })
-            .catch(err => err);
+                .then(data => {
+                    this.letters = data;  
+                    this.valueReturn = this.totalValue();   
+                })
+                .catch(err => err);
+
+            
+            
         }
         
-
-        
-
- 
-        
-
-        //fazendo a soma dos valores das cartas pelo departamento selencionado na home page
-        //this.valueReturn = this.totalValue();
-
     }
 
     public initializeLetters = () => {
@@ -87,19 +92,6 @@ export class BillingsPage {
         this.nav.push(LetterPage, letter);
     }
 
-    divFilterLetters() {
-        if(this.div.id!='todas'){
-            this.lettersByDivision()
-                .then(data => {
-                    this.letters = data;
-                    this.divFilterLetters();
-                })
-                .catch(err => err);
-        }
-        
-
-    }
-
     //soma do valor das cartas da divisão selecionada na homepage
     totalValue() {
 
@@ -107,7 +99,7 @@ export class BillingsPage {
         this.i = 0;
 
         this.letters.forEach(element => {
-            this.sum += Number(this.letters[this.i].value);
+            this.sum += Number(this.letters[this.i].parcelValue);
             this.i++;
 
         });
@@ -118,15 +110,18 @@ export class BillingsPage {
     //pequisa para filtragem por nome de carta 
     getLetters(ev) {
 
-        this.initializeLetters();
-        this.divFilterLetters();
-
         let val = ev.target.value;
 
         if (val && val.trim() != '') {
             this.letters = this.letters.filter((letter) => {
-                return (letter.client.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                return (letter.accountName.toLowerCase().indexOf(val.toLowerCase()) > -1);
             })
+        }else{
+            this.lettersByDivision()
+                .then(data => {
+                    this.letters = data;
+                })
+                .catch(err => err);
         }
 
 
