@@ -14,78 +14,94 @@ import 'rxjs/add/operator/map';
 })
 
 @Injectable()
-export class BillingsPage{
+export class BillingsPage {
 
-    public letters: any;
+    public letters: any = [];
 
     div: any;
     sum: number;
     i: number;
     //private valueReturn;
 
-    constructor(private nav:NavController, private navParams: NavParams, private http: Http){
-
-        this.initializeLetters().then(data => console.log(this.letters = data)).catch(err => err);
-
-       
+    constructor(private nav: NavController, private navParams: NavParams, private http: Http) {
 
         this.div = this.navParams.data;
 
-        console.log(this.letters);
+        if(this.div.id!='todas'){
+            //filtrando as letters pelo departamento selecionado na home page
+            this.divFilterLetters();
+        }else{
+            this.initializeLetters()
+            .then(data => {
+                this.letters = data;     
+            })
+            .catch(err => err);
+        }
+        
 
-        //filtrando as letters pelo departamento selecionado na home page
-        //this.divFilterLetters();    
+        
+
+ 
+        
 
         //fazendo a soma dos valores das cartas pelo departamento selencionado na home page
         //this.valueReturn = this.totalValue();
 
     }
 
-    
-        
-
-
     public initializeLetters = () => {
         return new Promise((resolve, reject) => {
-        let headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Bearer ${ localStorage.getItem('jwtToken') }`
-        });
-        let options = new RequestOptions({ headers: headers });
-        this.http
-            .get('http://api-fcamara.azurewebsites.net/v1/billingLetters', options)
-            .map((res: Response) => JSON.stringify(res.json().results))
-            .subscribe(data => resolve(JSON.parse(data)), err => reject(err))
+            let headers = new Headers({
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+            });
+            let options = new RequestOptions({ headers: headers });
+            this.http
+                .get('http://api-fcamara.azurewebsites.net/v1/billingLetters', options)
+                .map((res: Response) => JSON.stringify(res.json().results))
+                .subscribe(data => resolve(JSON.parse(data)), err => reject(err))
         })
     }
 
-//botão de filtrar clicado
-    goToFiltersPage(){
+    public lettersByDivision = () => {
+        return new Promise((resolve, reject) => {
+            let headers = new Headers({
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+            });
+            let options = new RequestOptions({ headers: headers });
+            this.http
+                .get('http://api-fcamara.azurewebsites.net/v1/billingLetters?divisionId=' + this.div.id, options)
+                .map((res: Response) => JSON.stringify(res.json().results))
+                .subscribe(data => resolve(JSON.parse(data)), err => reject(err))
+        })
+    }
+
+    //botão de filtrar clicado
+    goToFiltersPage() {
         this.nav.push(FiltersPage);
     }
 
-//carta selecionada na lista
-    letterTapped($event, letter){
+    //carta selecionada na lista
+    letterTapped($event, letter) {
         this.nav.push(LetterPage, letter);
     }
 
-    divFilterLetters(){
-        
-        if(this.div.id == 'todas'){
-            this.initializeLetters();
-        }
-        else{
-            this.letters.forEach(element => {
-                this.letters = this.letters.filter((letter) => {
-                    return (letter.division.indexOf(this.div.id) > -1);
+    divFilterLetters() {
+        if(this.div.id!='todas'){
+            this.lettersByDivision()
+                .then(data => {
+                    this.letters = data;
+                    this.divFilterLetters();
                 })
-            })
+                .catch(err => err);
         }
         
+
     }
 
-//soma do valor das cartas da divisão selecionada na homepage
-    totalValue(){
+    //soma do valor das cartas da divisão selecionada na homepage
+    totalValue() {
 
         this.sum = 0;
         this.i = 0;
@@ -95,16 +111,16 @@ export class BillingsPage{
             this.i++;
 
         });
-        
-            return this.sum;
+
+        return this.sum;
     }
 
-//pequisa para filtragem por nome de carta 
-     getLetters(ev) {
+    //pequisa para filtragem por nome de carta 
+    getLetters(ev) {
 
-         this.initializeLetters();
-         this.divFilterLetters();
-        
+        this.initializeLetters();
+        this.divFilterLetters();
+
         let val = ev.target.value;
 
         if (val && val.trim() != '') {
@@ -117,5 +133,5 @@ export class BillingsPage{
     }
 
 
-    
+
 }

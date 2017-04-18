@@ -10,20 +10,28 @@ export class HomePage {
 
     divisions = [
         {
-            id: "innovation",
-            name: "Inovação"
+            id: "1",
+            name: "OC"
         },
         {
-            id: "ecomerce",
-            name: "E-Comerce"
-        },
-        {
-            id: "port",
+            id: "2",
             name: "Porto"
         },
         {
-            id: "oc",
-            name: "OC"
+            id: "3",
+            name: "E-Comerce"
+        },
+        {
+            id: "4",
+            name: "Projetos Especiais"
+        },
+        {
+            id: "5",
+            name: "Inovação"
+        },
+        {
+            id: "6",
+            name: "Franca"
         },
         {
             id: "todas",

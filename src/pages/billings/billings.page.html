@@ -53,11 +53,11 @@
 
                                 <p></p>
                             <ion-icon name="flag" class="cardIcon"></ion-icon>
-                                {{ letter.status }}
+                                {{ letter.forecastStatus }}
 
                                 <p></p>
                             <ion-icon name="cash" class="cardIcon"></ion-icon>
-                                R${{ letter.parcelValue * letter.totalParcels }},00
+                                {{ letter.parcelValue * letter.totalParcels | currency:'BRL':true }}
 
                             <ion-badge item-right item-bottom class=" {{ letter.emitted }}">
                                 {{ letter.emitted }}
