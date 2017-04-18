@@ -19,18 +19,20 @@
     //display: block;
 }
 
-.false {
+.Pendente {
     color: white !important;
     background-color: darkred;
     font-size: 11px;
-    padding: 3px 4px;   
+   // padding: 3px 4px;   
+    float:right;
 }
 
-.true {
+.Emitido {
     color: white !important;
     background-color: green;
     font-size: 11px;
     padding: 3px 9px;
+    float:right;
 }
 
 .letters{
@@ -64,4 +66,13 @@
     margin-left: -16px;
     font-size: 14px;
     margin-block-start: -15px;
+}
+
+.totalValue {
+    float: right;
+    margin-top: 2px;
+}
+
+.ngForCards {
+    margin-top: -50px;
 }

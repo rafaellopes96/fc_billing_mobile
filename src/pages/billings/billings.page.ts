@@ -34,6 +34,7 @@ export class BillingsPage {
                 .then(data => {
                     this.letters = data;
                     this.valueReturn = this.totalValue();
+                    this.treatCards();
                 })
                 .catch(err => err);
             //fazendo a soma dos valores das cartas pelo departamento selencionado na home page
@@ -45,6 +46,7 @@ export class BillingsPage {
                 .then(data => {
                     this.letters = data;  
                     this.valueReturn = this.totalValue();   
+                    this.treatCards();
                 })
                 .catch(err => err);
 
@@ -106,6 +108,47 @@ export class BillingsPage {
 
         return this.sum;
     }
+
+    //tratar status, valor e status de emissão dos cards
+   treatCards() {
+       this.letters.forEach(element => {
+           var value = element.parcelValue/1000;
+           value ? element.parcelValue = Number(value.toFixed(1)) : element.parcelValue = "--- ";
+
+           if(element.emitted == true){
+               element.emitted = "Emitido";
+           } else {
+               element.emitted = "Pendente";
+           }
+
+           switch(element.forecastStatus){
+               case 1: {
+                   element.forecastStatus = "Em aberto";
+                   break;
+               }
+               case 2: {
+                   element.forecastStatus = "Liberado FCamara";
+                   break;
+               }
+               case 3: {
+                   element.forecastStatus = "Liberado Cliente";
+                   break;
+               }
+               case 4: {
+                   element.forecastStatus = "Aguardando Pagamento";
+                   break;
+               }
+               case 5: {
+                   element.forecastStatus = "Pago";
+                   break;
+               }
+               default: {
+                   element.forecastStatus = "---"
+               }
+
+           }
+       });
+   }
 
     //pequisa para filtragem por nome de carta 
     getLetters(ev) {
