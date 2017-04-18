@@ -117,11 +117,21 @@ export class BillingsPage {
                 return (letter.accountName.toLowerCase().indexOf(val.toLowerCase()) > -1);
             })
         }else{
-            this.lettersByDivision()
+            if(this.div.id != 'total'){
+                this.lettersByDivision()
+                    .then(data => {
+                        this.letters = data;
+                    })
+                    .catch(err => err);
+            }else{
+                this.initializeLetters()
                 .then(data => {
-                    this.letters = data;
+                    this.letters = data;  
+                    this.valueReturn = this.totalValue();   
                 })
                 .catch(err => err);
+            }
+            
         }
 
 
