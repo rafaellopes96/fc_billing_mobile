@@ -26,6 +26,7 @@ export class BillingsPage {
     constructor(private nav: NavController, private navParams: NavParams, private http: Http) {
 
         this.div = this.navParams.data;
+        console.log(this.div);
 
         if(this.div.id!='todas'){
 
@@ -155,27 +156,35 @@ export class BillingsPage {
 
         let val = ev.target.value;
 
-        if (val && val.trim() != '') {
-            this.letters = this.letters.filter((letter) => {
-                return (letter.accountName.toLowerCase().indexOf(val.toLowerCase()) > -1);
-            })
-        }else{
-            if(this.div.id != 'total'){
+        if(this.div.id != 'total'){
                 this.lettersByDivision()
                     .then(data => {
                         this.letters = data;
+                        this.treatCards();
+                        if (val && val.trim() != '') {
+                            this.letters = this.letters.filter((letter) => {
+                                return (letter.accountName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                            })
+                            
+                        }
                     })
                     .catch(err => err);
             }else{
                 this.initializeLetters()
                 .then(data => {
                     this.letters = data;  
-                    this.valueReturn = this.totalValue();   
+                    this.treatCards();  
+                    if (val && val.trim() != '') {
+                            this.letters = this.letters.filter((letter) => {
+                                return (letter.accountName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                        })
+                        
+                    }
                 })
                 .catch(err => err);
             }
-            
-        }
+
+       
 
 
     }

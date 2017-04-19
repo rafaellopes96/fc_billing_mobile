@@ -9,6 +9,9 @@ import { Component } from '@angular/core';
 export class FiltersPage{
 
     letterName: string;
+    issuedOp: string;
+    statusOp: string;
+    filterOptions: any = [];
 
     status= [
         {id:'AP', name:'Aguardando pagamento'},
@@ -23,13 +26,23 @@ export class FiltersPage{
         'Pendente'
     ]
 
-    constructor(public nav: NavController){}
+    constructor(public nav: NavController){
+    }
+        
+    goToBillingsPage($event, letterName){
+        this.filterOptions[0] = this.statusOp;
+        this.filterOptions[1] = this.issuedOp;
+        this.filterOptions[2] = letterName;
 
-    goToBillingsPage($event, issue, stat, letterName){
-        this.nav.push(BillingsPage, issue, stat, letterName);
+        this.nav.push(BillingsPage, this.filterOptions);
     }
 
-    filtersPage($event, status){
-
+    setStatus(status){
+        this.statusOp = status;
     }
+
+    setIssued(issue){
+        this.issuedOp = issue;
+    }
+
 }

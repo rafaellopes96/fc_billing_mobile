@@ -17,7 +17,7 @@
     <ion-item class="inputsCarta">
       <ion-label color="dark">Emissão</ion-label>
       <ion-select [(ngModel)]="emissao" cancelText="Cancelar">
-        <ion-option *ngFor="let issue of issued">
+        <ion-option *ngFor="let issue of issued" (ionSelect)="setIssued(issue)">
           {{ issue }}
         </ion-option>
       </ion-select>
@@ -27,7 +27,7 @@
     <ion-item class="inputsCarta">
       <ion-label color="dark">Status</ion-label>
       <ion-select [(ngModel)]="estado" cancelText="Cancelar">
-        <ion-option *ngFor="let stat of status">
+        <ion-option *ngFor="let stat of status" (ionSelect)="setStatus(stat.name)">
           {{ stat.name }}
         </ion-option>
       </ion-select>
@@ -42,7 +42,7 @@
 
   </ion-list>
 
-  <button ion-button icon-left color="dark" (click)="goToBillingsPage($event, issue, stat, letterName)" class="centerButton">
+  <button ion-button icon-left color="dark" (click)="goToBillingsPage($event, letterName)" class="centerButton">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
             Filtrar
     </button>
