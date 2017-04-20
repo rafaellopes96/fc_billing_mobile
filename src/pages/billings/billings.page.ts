@@ -17,25 +17,25 @@ import 'rxjs/add/operator/map';
 export class BillingsPage {
 
     public letters: any = [];
+    public aux: any = [];
 
     div: any;
+
     sum: number;
     i: number;
     private valueReturn;
 
     constructor(private nav: NavController, private navParams: NavParams, private http: Http) {
-
-        this.div = this.navParams.data;
-        console.log(this.div);
+        console.log(this.navParams.data[0]);
+        this.div = this.navParams.data[0];
+        
 
         if(this.div.id!='todas'){
 
             //filtrando as letters pelo departamento selecionado na home page
             this.lettersByDivision()
                 .then(data => {
-                    this.letters = data;
-                    this.valueReturn = this.totalValue();
-                    this.treatCards();
+                    this.createCards(data);
                 })
                 .catch(err => err);
             //fazendo a soma dos valores das cartas pelo departamento selencionado na home page
@@ -45,9 +45,7 @@ export class BillingsPage {
 
             this.initializeLetters()
                 .then(data => {
-                    this.letters = data;  
-                    this.valueReturn = this.totalValue();   
-                    this.treatCards();
+                    this.createCards(data);
                 })
                 .catch(err => err);
 
@@ -85,14 +83,36 @@ export class BillingsPage {
         })
     }
 
+    //Cria os cards
+    createCards(data) {
+        this.filter();
+        this.letters = data;
+        //this.aux = data;
+        //this.checkMonth();
+        this.valueReturn = this.totalValue();
+        this.treatCards();
+    }
+
     //botão de filtrar clicado
     goToFiltersPage() {
-        this.nav.push(FiltersPage);
+        this.nav.push(FiltersPage, this.div);
     }
 
     //carta selecionada na lista
     letterTapped($event, letter) {
         this.nav.push(LetterPage, letter);
+    }
+
+    //realiza os filtros
+    filter() {
+        if(this.navParams.data[1]){
+            
+        }
+        if(this.navParams.data[2]){
+            
+        }
+        if(this.navParams.data[3]){
+        }
     }
 
     //soma do valor das cartas da divisão selecionada na homepage
@@ -107,14 +127,32 @@ export class BillingsPage {
 
         });
 
+        var value = this.sum/1000;
+        value ? this.sum = Number(value.toFixed(1)) : this.sum = 0.0;
+
         return this.sum;
     }
 
+    //Checar se é o mês atual
+    checkMonth() {
+        this.i = 0;
+
+        this.aux.forEach(element => {
+            var date = new Date(element.dueDate);
+            var today = new Date();
+            if(date.getMonth()==today.getMonth() && date.getFullYear()==today.getFullYear()){
+                this.letters[this.i] = element;
+                this.i++;
+            }else{
+            }
+        })
+    }
+
     //tratar status, valor e status de emissão dos cards
-   treatCards() {
+    treatCards() {
        this.letters.forEach(element => {
            var value = element.parcelValue/1000;
-           value ? element.parcelValue = Number(value.toFixed(1)) : element.parcelValue = "--- ";
+           value ? element.parcelValue = Number(value.toFixed(1)) : element.parcelValue = "0.0";
 
            if(element.emitted == true){
                element.emitted = "Emitido";

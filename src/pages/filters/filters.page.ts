@@ -1,5 +1,5 @@
 import { BillingsPage } from '../pages';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,11 +7,12 @@ import { Component } from '@angular/core';
 })
 
 export class FiltersPage{
-
     letterName: string;
     issuedOp: string;
     statusOp: string;
     filterOptions: any = [];
+    divOp: any;
+    placeholder: string;
 
     status= [
         {id:'AP', name:'Aguardando pagamento'},
@@ -26,13 +27,25 @@ export class FiltersPage{
         'Pendente'
     ]
 
-    constructor(public nav: NavController){
+    divs= [
+        {id: "1", name: "OC"},
+        {id: "2", name: "Porto"},
+        {id: "3", name: "E-Comerce"},
+        {id: "5", name: "Inovação"},
+        {id: "todas", name: "Todas"}
+    ]
+
+
+    constructor(public nav: NavController, private navParams: NavParams){
+        this.divOp = this.navParams.data;
+        this.placeholder = this.divOp.name;
     }
         
     goToBillingsPage($event, letterName){
-        this.filterOptions[0] = this.statusOp;
-        this.filterOptions[1] = this.issuedOp;
-        this.filterOptions[2] = letterName;
+        this.filterOptions[0] = this.divOp;
+        this.filterOptions[1] = this.statusOp;
+        this.filterOptions[2] = this.issuedOp;
+        this.filterOptions[3] = letterName;
 
         this.nav.push(BillingsPage, this.filterOptions);
     }
@@ -45,4 +58,11 @@ export class FiltersPage{
         this.issuedOp = issue;
     }
 
+    setDiv(div){
+        this.divOp = div;
+    }
+
+    getDiv(div){
+        return this.divOp;
+    }
 }

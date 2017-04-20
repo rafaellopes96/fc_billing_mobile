@@ -15,9 +15,25 @@
     </ion-list-header>
 
     <ion-item class="inputsCarta">
+      <ion-label color="dark">Divisão</ion-label>
+      <ion-select [(ngModel)]="divisao" placeholder=placeholder cancelText="Cancelar">
+        <ion-option *ngFor="let div of divs" (ionSelect)="setDiv(div)">
+          {{ div.name }}
+        </ion-option>
+      </ion-select>
+      <ion-icon name='list' item-left></ion-icon>
+    </ion-item>
+
+    <ion-item class="inputsCarta">
+      <ion-label color="dark" fixed>Nome</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="letterName"></ion-input>
+      <ion-icon name='mail' item-left></ion-icon>
+    </ion-item>
+
+    <ion-item class="inputsCarta">
       <ion-label color="dark">Emissão</ion-label>
       <ion-select [(ngModel)]="emissao" cancelText="Cancelar">
-        <ion-option *ngFor="let issue of issued" (ionSelect)="setIssued(issue)">
+        <ion-option *ngFor="let issue of issued" (ionChange)="setIssued(issue)">
           {{ issue }}
         </ion-option>
       </ion-select>
@@ -27,17 +43,11 @@
     <ion-item class="inputsCarta">
       <ion-label color="dark">Status</ion-label>
       <ion-select [(ngModel)]="estado" cancelText="Cancelar">
-        <ion-option *ngFor="let stat of status" (ionSelect)="setStatus(stat.name)">
+        <ion-option *ngFor="let stat of status" (ionChange)="setStatus(stat.name)">
           {{ stat.name }}
         </ion-option>
       </ion-select>
       <ion-icon name='flag' item-left></ion-icon>
-    </ion-item>
-
-    <ion-item class="inputsCarta">
-      <ion-label color="dark" fixed>Nome</ion-label>
-      <ion-input type="text" value="" [(ngModel)]="letterName"></ion-input>
-      <ion-icon name='mail' item-left></ion-icon>
     </ion-item>
 
   </ion-list>

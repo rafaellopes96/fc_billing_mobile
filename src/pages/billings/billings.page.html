@@ -17,25 +17,28 @@
 
     <ion-searchbar (ionInput)="getLetters($event)" class="searchBar"></ion-searchbar>
 
+    <ion-list radio-group [(ngModel)]="month" class="button button-bar">
+        <ion-item>
+            <ion-label>Mês Atual</ion-label>
+            <ion-radio checked="true" value="currentMonth"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <ion-label>Mês Anterior</ion-label>
+            <ion-radio value="previousMonth"></ion-radio>
+        </ion-item>
+    </ion-list>
+
     <ion-card color="dark">
             <ion-card-header class="cardsHeader">
                       {{ div.name }}
                 <ion-note class="totalValue">
-                    {{ valueReturn | currency:'BRL':true }}
+                    R$ {{ valueReturn }}K
                 </ion-note>
                     
             </ion-card-header>
 
             </ion-card>
 
-            <!--<ion-item>
-                Total
-                <ion-icon name='calculator' class="calculatorIcon" item-left></ion-icon>
-                    
-                <ion-note item-right>
-                    {{ valueReturn | currency:'BRL':true }}
-                </ion-note>
-            </ion-item>-->
                 <ion-card *ngFor="let letter of letters" class="ngForCards" (click)="letterTapped($event, letter)">
                     
                     <ion-card-header>
@@ -52,7 +55,7 @@
 
                                 <br/>
                             <ion-icon name="flag" class="cardIcon"></ion-icon>
-                                {{ letter.forecastStatus }}
+                                {{ letter.dueDate }}
 
                                 <br/>
                                 <div class="cardIcon">

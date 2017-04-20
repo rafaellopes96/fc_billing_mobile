@@ -22,16 +22,8 @@ export class HomePage {
             name: "E-Comerce"
         },
         {
-            id: "4",
-            name: "Projetos Especiais"
-        },
-        {
             id: "5",
             name: "Inovação"
-        },
-        {
-            id: "6",
-            name: "Franca"
         },
         {
             id: "todas",
@@ -43,6 +35,7 @@ export class HomePage {
     constructor(public nav:NavController){}
 
     itemTapped($event, div){
+        div = [div];
         this.nav.push(BillingsPage, div);
     }
 

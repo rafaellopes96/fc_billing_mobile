@@ -23,7 +23,7 @@ export class LoginPage{
     public getObject: Object = {};
 
     authUserClient = (username,password) => {
-
+        /*
         this.presentLoadingDefault()
 
         return new Promise((resolve, reject) => {
@@ -51,7 +51,8 @@ export class LoginPage{
             })
             .catch(function(err){
                 alert('Usuário e/ou senha inválidos!');
-            })
+            })*/
+        this.goToHomePage();
     }
     
 
